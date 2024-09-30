@@ -426,4 +426,4 @@ def emitir_factura(contribuyente, driver):
     seleccionar_producto_o_servicio(driver, contribuyente)
     completar_datos_receptor(driver, contribuyente)
     completar_descripcion_e_importe(driver, contribuyente)
-    # confirmar_factura(driver, contribuyente)
+    confirmar_factura(driver, contribuyente)
