@@ -386,35 +386,39 @@ def completar_descripcion_e_importe(driver, contribuyente):
 
     # elemento.click()
 
-
 def confirmar_factura(driver, contribuyente):
     # Confirma la generación de la factura
     aceptar_button = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.ID, 'btngenerar')))
+    EC.presence_of_element_located((By.XPATH, "//input[@value='Continuar >']")))
     aceptar_button.click()
 
     time.sleep(random.randint(1, 2))
 
+    confirmar_button = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.ID, "btngenerar")))
+    confirmar_button.click()
+
     driver.switch_to.alert.accept()
     if contribuyente.detalles_factura.descarga == 'Si':
         elemento_descarga = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//*[@id='botones_comprobante']/input")))
+        EC.presence_of_element_located((By.XPATH, "//*[@id='botones_comprobante']/input")))
 
         driver.execute_script("arguments[0].scrollIntoView();", elemento_descarga)
 
         time.sleep(2)
 
         elemento_descarga.click()
-    time.sleep(random.randint(1, 2))
+        time.sleep(random.randint(1, 2))
 
-    # Volver a menu principal
-    elemento_menu = WebDriverWait(driver, 10).until(
+        # Volver a menu principal
+        elemento_menu = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, '//*[@id="contenido"]/table/tbody/tr[2]/td/input')))
-    driver.execute_script("arguments[0].scrollIntoView();", elemento_menu)
-    time.sleep(2)
-    elemento_menu.click()
+        driver.execute_script("arguments[0].scrollIntoView();", elemento_menu)
+        time.sleep(2)
+        elemento_menu.click()
 
-    time.sleep(random.randint(1, 2))
+        time.sleep(random.randint(1, 2))
+
 
 
 def emitir_factura(contribuyente, driver):
